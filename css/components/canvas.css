@@ -1,0 +1,12 @@
+.canvas-container {
+  margin-block-start: 2em;
+  background-color: rgb(194, 219, 241);
+}
+
+.canvas-container h1 {
+  text-align: center;
+}
+
+.canvas-container canvas {
+  margin-inline-start: 8em;
+}

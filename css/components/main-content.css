@@ -1,0 +1,39 @@
+.main-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+section.controllers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 5px;
+  margin-inline-end: 2em;
+}
+
+section.controllers .txt-meme {
+  grid-column: 1/-1;
+  margin: 2em;
+  height: 2em;
+}
+
+.btns {
+  display: flex;
+  grid-column: 1/-1;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.container {
+  display: flex;
+  grid-column: 1/-1;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.btn-txt-l::after {
+  content: '↑';
+}
+.btn-txt-s::after {
+  content: '↓';
+}

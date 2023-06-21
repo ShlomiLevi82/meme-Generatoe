@@ -1,0 +1,20 @@
+.gallery {
+  margin-block-start: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: center;
+  gap: 5px;
+  width: 95vw;
+  height: 90vh;
+  background-color: rgb(238, 244, 244);
+}
+
+.gallery h1 {
+  font-size: 2em;
+}
+
+.img-card img {
+  margin-block-start: 1em;
+  width: 150px;
+}

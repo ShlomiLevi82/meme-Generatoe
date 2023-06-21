@@ -1,0 +1,28 @@
+.sharing {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.sharing .file-input {
+  border: 1px solid red;
+  padding: 5px;
+  margin: 10px;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 30px;
+  }
+
+  .file-input {
+    font-size: 18px;
+  }
+  .canvas-container {
+    width: 85vw;
+    height: 50vh;
+  }
+}

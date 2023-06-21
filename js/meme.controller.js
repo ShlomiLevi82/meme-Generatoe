@@ -1,7 +1,5 @@
 'use strict'
 
-var gIsDrag = false
-
 function renderMeme() {
   const meme = getMeme()
   const img = new Image()
@@ -11,13 +9,14 @@ function renderMeme() {
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     meme.lines.forEach((line, idx) => {
-      drawText(line, idx)
+      drawText(line.txt, idx)
     })
   }
 }
 
 function drawText(text) {
   let fontSize = getFontSize()
+
   gCtx.strokeStyle = getStrokeColor()
   gCtx.fillStyle = getFillColor()
   gCtx.lineWidth = 1
@@ -38,8 +37,4 @@ function getFillColor() {
   let fillColor = document.querySelector('.clr-fill').value
 
   return fillColor
-}
-
-function getIsDrag() {
-  return gIsDrag
 }

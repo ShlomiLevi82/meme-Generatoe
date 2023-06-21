@@ -22,6 +22,7 @@ function renderGalery() {
 function onSelectImg(picId) {
   const img = new Image()
   img.src = getImgById(picId)
+  setMeme(picId)
   onMakeMeme()
   renderImg(img)
 }
@@ -46,7 +47,6 @@ function onAddText() {
 
   getTextFromInput(text)
   renderMeme()
-  drawText(gMeme.lines.txt)
 }
 
 function renderCanvas() {
@@ -93,7 +93,9 @@ function onDecreaseFontSize() {
 }
 
 function onAddLine() {
-  console.log('add line')
-  addLine()
-  gMeme.selectedLineIdx
+  const width = gElCanvas.width / 2
+  const height = gElCanvas.height / 2
+  addLine(width, height)
+
+  renderMeme()
 }

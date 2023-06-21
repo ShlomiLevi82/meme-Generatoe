@@ -1,13 +1,20 @@
 'use strict'
 
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
 let gElCanvas
 let gCtx
-const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+let gIsDrag = false
+let gLastPos
 
 function initCanvas() {
   gElCanvas = document.getElementById('canvas')
   gCtx = gElCanvas.getContext('2d')
   //   resizeCanvas()
+}
+
+function getIsDrag() {
+  return gIsDrag
 }
 
 function downloadImg(elLink) {
@@ -42,28 +49,36 @@ function addTouchListeners() {
 function onDown(ev) {
   console.log('Down')
   const pos = getEvPos(ev)
+  console.log('pos', pos)
+
   findLineIdx(pos)
   setLineDrag(true)
   gLastPos = pos
+
   document.body.style.cursor = 'grabbing'
   renderMeme()
 }
-function onMove(ev) {
-  console.log('Move')
-  const isDrag = getIsDrag()
-  if (!isDrag) return
-  console.log('Moving')
 
+function onMove(ev) {
+  const isDrag = getIsDrag()
+
+  if (!isDrag) return
+
+  console.log('Moving')
   const pos = getEvPos(ev)
+  console.log('pos-', pos)
+
   // Calc the delta, the diff we moved
   const dx = pos.x - gLastPos.x
   const dy = pos.y - gLastPos.y
+
   moveLine(dx, dy)
   // Save the last pos, we remember where we`ve been and move accordingly
   gLastPos = pos
   // The canvas is render again after every move
   renderMeme()
 }
+
 function onUp() {
   console.log('Up')
   setLineDrag(false)
@@ -75,12 +90,18 @@ function getEvPos(ev) {
     x: ev.offsetX,
     y: ev.offsetY,
   }
+  console.log('pos..', pos)
 
   if (TOUCH_EVS.includes(ev.type)) {
     // Prevent triggering the mouse ev
     ev.preventDefault()
     // Gets the first touch point
-    ev = ev.changedTouches[0]
+    // ev = ev.changedTouches[0]
+    const dx = pos.x - gLastPos.x
+    const dy = pos.y - gLastPos.y
+    console.log('dx', dx)
+    console.log('dy', dy)
+    moveLine(dx, dy)
     // Calc the right pos according to the touch screen
     pos = {
       x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
@@ -88,4 +109,8 @@ function getEvPos(ev) {
     }
   }
   return pos
+}
+
+function setLineDrag(isDrag) {
+  gIsDrag = isDrag
 }

@@ -2,13 +2,15 @@
 
 let gImgs = []
 let gMeme = {
-  selectedImgId: 5,
+  selectedImgId: 0,
   selectedLineIdx: 0,
   lines: [
     {
-      txt: 'I sometimes eat Falafel',
+      txt: 'I sometimes eat Falafel', //Default value:
       size: 20,
       color: 'red',
+      x: 0,
+      y: 0,
     },
   ],
 }
@@ -21,15 +23,8 @@ function getMeme() {
   return gMeme
 }
 
-function createImageList() {
-  for (let i = 1; i < 19; i++) {
-    let img = {
-      id: makeId(),
-      url: `/images/meme-imgs (square)/${i}.jpg`,
-    }
-    gImgs.push(img)
-  }
-  console.log('gImgs', gImgs)
+function setMeme(imgId) {
+  gMeme.selectedImgId = imgId
 }
 
 function getImgById(imgId) {
@@ -39,41 +34,39 @@ function getImgById(imgId) {
 }
 
 function getTextFromInput(txt) {
-  let lineIdx = gMeme.selectedLineIdx
-  let str = ''
-  str += txt
-  console.log('str', str)
-  gMeme.lines[lineIdx].txt = str
-  console.log('gMeme', gMeme)
-  console.log('gMeme.lines[lineIdx].txt', gMeme.lines[lineIdx].txt)
+  gMeme.lines[0].txt = txt
+  //   gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
 function getFontSize() {
   return gMeme.lines[0].size
+  //   return gMeme.lines[gMeme.selectedLineIdx].size
 }
 
 function setFontSize(fontSize) {
   gMeme.lines[0].size = fontSize
+  //   gMeme.lines[gMeme.selectedLineIdx].size = fontSize
 }
 
-function makeLine() {
+function createLine(x, y) {
   return {
-    txt: '',
-    size: 20,
+    txt: 'Writ a line',
+    size: 25,
     color: '#000000',
+    x,
+    y,
   }
 }
 
-function addLine() {
-  gMeme.lines.push(makeLine())
+function addLine(x, y) {
+  if (gMeme.lines.length === 1) y = y * 2 - 40
+  gMeme.lines.push(createLine(x, y))
+
+  selectLine(gMeme.lines.length - 1)
 }
 
 function selectLine(lineIdx) {
   gMeme.selectedLineIdx = lineIdx
-}
-
-function setLineDrag(isDrag) {
-  gIsDrag = isDrag
 }
 
 function findLineIdx({ x, y }) {
@@ -88,10 +81,29 @@ function findLineIdx({ x, y }) {
   })
 
   selectLine(lineIdx)
-  // setTxtInput(gMeme.lines[gMeme.selectedLineIdx].txt)
 }
 
 function moveLine(dx, dy) {
-  gMeme.lines[gMeme.selectedLineIdx].x += dx
-  gMeme.lines[gMeme.selectedLineIdx].y += dy
+  gMeme.lines[0].x += dx
+  gMeme.lines[0].y += dy
+  //   gMeme.lines[gMeme.selectedLineIdx].x += dx
+  //   gMeme.lines[gMeme.selectedLineIdx].y += dy
+  console.log('dx', dx)
+  console.log('dy', dy)
+}
+
+function measureTextWidth(lineIdx) {
+  return gCtx.measureText(gMeme.lines[0].txt).width
+  //   return gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
+}
+
+function createImageList() {
+  for (let i = 1; i < 19; i++) {
+    let img = {
+      id: makeId(),
+      url: `/images/meme-imgs (square)/${i}.jpg`,
+    }
+    gImgs.push(img)
+  }
+  console.log('gImgs', gImgs)
 }

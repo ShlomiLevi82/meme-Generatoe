@@ -53,17 +53,23 @@ function makeLorem(wordCount = 100) {
   return txt
 }
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min) + min)
+}
+
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function _saveToStorage(key, val) {
-  localStorage.setItem(key, JSON.stringify(val))
-}
-
-function _loadFromStorage(key) {
-  var val = localStorage.getItem(key)
-  return JSON.parse(val)
+function getRandomColor() {
+  var letters = '0123456789ABCDEF'.split('')
+  var color = '#'
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)]
+  }
+  return color
 }

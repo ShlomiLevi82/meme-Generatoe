@@ -1,12 +1,13 @@
-.canvas-container {
+.canvas-elements-container {
   margin-block-start: 2em;
   background-color: rgb(194, 219, 241);
 }
 
-.canvas-container h1 {
+.canvas-elements-container h1 {
   text-align: center;
 }
 
 .canvas-container canvas {
-  margin-inline-start: 8em;
+  margin-inline-start: 1em;
+  background-color: azure;
 }

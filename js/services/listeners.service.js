@@ -2,32 +2,6 @@
 
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
-let gElCanvas
-let gCtx
-let gIsDrag = false
-let gLastPos
-
-function initCanvas() {
-  gElCanvas = document.getElementById('canvas')
-  gCtx = gElCanvas.getContext('2d')
-  //   resizeCanvas()
-}
-
-function getIsDrag() {
-  return gIsDrag
-}
-
-function downloadImg(elLink) {
-  const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
-  elLink.href = imgContent
-}
-
-function resizeCanvas() {
-  const elContainer = document.querySelector('.canvascontainer')
-  gElCanvas.width = elContainer.offsetWidth
-  gElCanvas.height = elContainer.offsetHeight
-}
-
 function addListeners() {
   addMouseListeners()
   addTouchListeners()
@@ -47,12 +21,16 @@ function addTouchListeners() {
 }
 
 function onDown(ev) {
-  console.log('Down')
   const pos = getEvPos(ev)
-  console.log('pos', pos)
 
   findLineIdx(pos)
+
+  // const {line} = getMeme()
+
+  // document.querySelector('.line-txt').value = getSelectedTxt()
+
   setLineDrag(true)
+
   gLastPos = pos
 
   document.body.style.cursor = 'grabbing'
@@ -61,17 +39,13 @@ function onDown(ev) {
 
 function onMove(ev) {
   const isDrag = getIsDrag()
-
   if (!isDrag) return
+  // console.log('Moving the line')
 
-  console.log('Moving')
   const pos = getEvPos(ev)
-  console.log('pos-', pos)
-
   // Calc the delta, the diff we moved
   const dx = pos.x - gLastPos.x
   const dy = pos.y - gLastPos.y
-
   moveLine(dx, dy)
   // Save the last pos, we remember where we`ve been and move accordingly
   gLastPos = pos
@@ -80,8 +54,8 @@ function onMove(ev) {
 }
 
 function onUp() {
-  console.log('Up')
   setLineDrag(false)
+
   document.body.style.cursor = 'grab'
 }
 
@@ -90,18 +64,12 @@ function getEvPos(ev) {
     x: ev.offsetX,
     y: ev.offsetY,
   }
-  console.log('pos..', pos)
 
   if (TOUCH_EVS.includes(ev.type)) {
     // Prevent triggering the mouse ev
     ev.preventDefault()
     // Gets the first touch point
-    // ev = ev.changedTouches[0]
-    const dx = pos.x - gLastPos.x
-    const dy = pos.y - gLastPos.y
-    console.log('dx', dx)
-    console.log('dy', dy)
-    moveLine(dx, dy)
+    ev = ev.changedTouches[0]
     // Calc the right pos according to the touch screen
     pos = {
       x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
@@ -109,8 +77,4 @@ function getEvPos(ev) {
     }
   }
   return pos
-}
-
-function setLineDrag(isDrag) {
-  gIsDrag = isDrag
 }

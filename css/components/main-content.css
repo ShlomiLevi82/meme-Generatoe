@@ -56,11 +56,11 @@
   grid-area: f;
 }
 
-.btn-txt-l::after {
+.btn-up::after {
   content: '↑';
 }
 
-.btn-txt-s::after {
+.btn-down::after {
   content: '↓';
 }
 

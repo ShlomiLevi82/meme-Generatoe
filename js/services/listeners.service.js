@@ -24,11 +24,6 @@ function onDown(ev) {
   const pos = getEvPos(ev)
 
   findLineIdx(pos)
-
-  // const {line} = getMeme()
-
-  // document.querySelector('.line-txt').value = getSelectedTxt()
-
   setLineDrag(true)
 
   gLastPos = pos

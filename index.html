@@ -39,8 +39,8 @@
           class="txt-meme"
           oninput="onAddText(this.value)"
         />
-        <button class="btn btn-up" type="button">+A</button>
-        <button class="btn btn-down" type="button">-A</button>
+        <button class="btn btn-up" type="button"></button>
+        <button class="btn btn-down" type="button"></button>
         <button onclick="onAddLine()" class="btn btn-add" type="button">
           Add
         </button>
@@ -48,8 +48,8 @@
           Delete
         </button>
         <h3>Fonts:</h3>
-        <button onclick="onSetFontSize(5)" class="btn btn-txt-l"></button>
-        <button onclick="onSetFontSize(-5)" class="btn btn-txt-s"></button>
+        <button onclick="onSetFontSize(5)" class="btn btn-txt-l">+A</button>
+        <button onclick="onSetFontSize(-5)" class="btn btn-txt-s">-A</button>
         <label class="fill" for="fill">Fill</label>
         <input
           oninput="onSetClrFill(this.value)"

@@ -16,7 +16,7 @@ function createImageList() {
   for (let i = 1; i < 19; i++) {
     let img = {
       id: i,
-      url: `/img/${i}.jpg`,
+      url: `img/${i}.jpg`,
     }
     gImgs.push(img)
   }

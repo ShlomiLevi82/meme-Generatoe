@@ -19,7 +19,7 @@ function onShowGallery() {
 
 function onMakeMeme() {
   document.querySelector('.gallery').style.display = 'none'
-  document.querySelector('.canvas-elements-container').style.display = 'block'
+  document.querySelector('.canvas-elements-container').style.display = 'grid'
 }
 
 function resizeCanvas() {
@@ -42,7 +42,7 @@ function renderGalery() {
 }
 
 function onSelectImg(imgId) {
-  document.querySelector('.canvas-elements-container').style.display = 'block'
+  document.querySelector('.canvas-elements-container').style.display = 'grid'
   document.querySelector('.gallery').style.display = 'none'
 
   resizeCanvas()
@@ -61,6 +61,7 @@ function renderMeme() {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     meme.lines.forEach((line, idx) => {
       placeTxt(line, idx)
+      renderTxtBorder(line, line.x, line.y, line.fontSize)
     })
   }
 }
@@ -86,7 +87,7 @@ function setSelectedLine(line) {
   document.querySelector('.clr-fill').value = line.colorFill
 }
 
-function placeTxt(line, idx) {
+function placeTxt(line) {
   gCtx.lineWidth = 1
   gCtx.strokeStyle = line.colorStroke
   gCtx.fillStyle = line.colorFill
@@ -100,6 +101,20 @@ function placeTxt(line, idx) {
 function onAddText(txt) {
   setLineTxt(txt)
   renderMeme()
+}
+
+function measureTextWidth(lineIdx) {
+  return gCtx.measureText(gMeme.lines[lineIdx].txt).width
+}
+
+function renderTxtBorder(txt, x, y, fontSize) {
+  let txtSizes = gCtx.measureText(txt)
+  console.log('textSizes', txtSizes)
+  gCtx.strokeStyle = 'Black'
+
+  let calculatedX = x - txtSizes.width / 2 - 10
+  let calculatedY = y - fontSize + 10
+  gCtx.strokeRect(calculatedX, calculatedY, txtSizes.width + 25, fontSize + 10)
 }
 
 function onAddLine() {
@@ -123,8 +138,4 @@ function onDownloadImg(elLink) {
 
   elLink.href = data
   elLink.download = 'my-meme'
-}
-
-function measureTextWidth(lineIdx) {
-  return gCtx.measureText(gMeme.lines[lineIdx].txt).width
 }

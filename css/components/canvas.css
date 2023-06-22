@@ -3,10 +3,6 @@
   background-color: rgb(194, 219, 241);
 }
 
-.canvas-elements-container h1 {
-  text-align: center;
-}
-
 .canvas-container canvas {
   margin-inline-start: 1em;
   background-color: azure;

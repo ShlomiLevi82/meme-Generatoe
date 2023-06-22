@@ -4,9 +4,8 @@
   flex-wrap: wrap;
   align-content: stretch;
   justify-content: center;
-  gap: 5px;
+  gap: 0.4em;
   width: 95vw;
-  height: 90vh;
   background-color: rgb(238, 244, 244);
 }
 

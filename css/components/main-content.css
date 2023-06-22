@@ -1,39 +1,88 @@
 .main-container {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-}
-
-section.controllers {
-  display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 5px;
-  margin-inline-end: 2em;
+  grid-template-rows: repeat(5, auto);
+  grid-template-areas:
+    'txt  txt  txt  txt'
+    'a    b    c    d'
+    'font font fil  strok'
+    'e    f    g    h'
+    'can  can  can  can';
 }
 
-section.controllers .txt-meme {
-  grid-column: 1/-1;
-  margin: 2em;
-  height: 2em;
+.main-container .txt-meme {
+  grid-area: txt;
+  width: 90vw;
+  height: 3em;
+  margin-block-end: 1em;
 }
 
-.btns {
-  display: flex;
-  grid-column: 1/-1;
-  justify-content: space-around;
-  align-items: flex-start;
+.main-container button.btn-up {
+  grid-area: a;
 }
 
-.container {
-  display: flex;
-  grid-column: 1/-1;
-  justify-content: space-around;
-  align-items: flex-start;
+.main-container button.btn-down {
+  grid-area: b;
+}
+
+.main-container button.btn-add {
+  grid-area: c;
+}
+
+.main-container button.btn-delet {
+  grid-area: d;
+}
+
+.main-container h3 {
+  grid-area: font;
+  margin-block-start: 1em;
+}
+
+.main-container .fill {
+  grid-area: fil;
+  margin-block-start: 1em;
+}
+
+.main-container .stroke {
+  grid-area: strok;
+  margin-block-start: 1em;
+}
+
+.main-container .btn-txt-l {
+  grid-area: e;
+}
+
+.main-container .btn-txt-s {
+  grid-area: f;
 }
 
 .btn-txt-l::after {
   content: '↑';
 }
+
 .btn-txt-s::after {
   content: '↓';
+}
+
+.main-container .clr-fill {
+  grid-area: g;
+  width: auto;
+  height: auto;
+}
+.main-container .clr-stroke {
+  grid-area: h;
+  width: auto;
+  height: auto;
+}
+
+.canvas-container {
+  grid-area: can;
+  margin-block-start: 1em;
+  width: auto;
+  height: auto;
+}
+
+.sharing.flex.flex-column {
+  align-items: stretch;
+  width: 90vw;
 }

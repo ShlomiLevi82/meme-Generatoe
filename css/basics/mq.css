@@ -1,0 +1,204 @@
+/* ONLY MOBILE  */
+@media (max-width: 800px) {
+  .main-header .main-nav-container {
+    position: fixed;
+    top: 130px;
+    left: 0;
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 2s;
+    align-items: end;
+  }
+
+  body.menu-open .main-header .main-nav-container {
+    grid-template-rows: 1fr;
+  }
+  .main-header .main-nav {
+    margin: 0;
+    min-height: 0;
+    flex-direction: column;
+    background-color: var(--clrPrimary-2);
+  }
+
+  .main-header .main-nav .nav-item {
+    padding: 1em 0;
+  }
+
+  .main-header .main-nav .nav-item:hover {
+    background-color: #000;
+  }
+}
+
+/* SMALL */
+@media (min-width: 640px) {
+}
+
+/* MEDIUM */
+@media (min-width: 800px) {
+  .main-nav > li {
+    margin: 10px;
+  }
+
+  .main-header-container {
+    display: grid;
+    align-items: center;
+    text-align: center;
+    height: 130px;
+    font-size: 2.5em;
+    width: 18em;
+    margin-inline: auto;
+  }
+  h1 {
+    margin-inline: auto;
+  }
+  .main-container {
+    grid-template-columns: repeat(8, auto);
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+      'can can can can txt  txt  txt  txt'
+      'can can can can a    b    c    d'
+      'can can can can font font fil  strok'
+      'can can can can e    f    g    h';
+  }
+
+  .main-container .txt-meme {
+    grid-area: txt;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .main-container button.btn-up {
+    grid-area: a;
+  }
+
+  .main-container button.btn-down {
+    grid-area: b;
+  }
+
+  .main-container button.btn-add {
+    grid-area: c;
+  }
+
+  .main-container button.btn-delet {
+    grid-area: d;
+  }
+
+  .main-container h3 {
+    grid-area: font;
+    font-size: 2em;
+  }
+
+  .main-container .fill {
+    grid-area: fil;
+    font-size: 2em;
+  }
+
+  .main-container .stroke {
+    grid-area: strok;
+    font-size: 2em;
+  }
+
+  .main-container .btn-txt-l {
+    grid-area: e;
+  }
+
+  .main-container .btn-txt-s {
+    grid-area: f;
+  }
+
+  .main-container .clr-fill {
+    grid-area: g;
+  }
+
+  .main-container .clr-stroke {
+    grid-area: h;
+  }
+
+  .canvas-container {
+    grid-area: can;
+  }
+
+  .sharing.flex.flex-column {
+    align-items: stretch;
+    width: auto;
+  }
+}
+
+/* LARGE */
+@media (min-width: 1020px) {
+  .main-container {
+    grid-template-columns: repeat(10, auto);
+    grid-template-rows: repeat(5, auto);
+    grid-template-areas:
+      'h1  h1  h1  h1  h1  h1  h1    h1    h1    h1'
+      'can can can can can can txt   txt   txt   txt'
+      'can can can can can can a     b     c     d'
+      'can can can can can can font  font  fil   strok'
+      'can can can can can can e     f     g     h';
+  }
+
+  .main-container h1 {
+    margin-inline: auto;
+    grid-area: h1;
+  }
+
+  .main-container .txt-meme {
+    grid-area: txt;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .main-container button.btn-up {
+    grid-area: a;
+  }
+
+  .main-container button.btn-down {
+    grid-area: b;
+  }
+
+  .main-container button.btn-add {
+    grid-area: c;
+  }
+
+  .main-container button.btn-delet {
+    grid-area: d;
+  }
+
+  .main-container h3 {
+    grid-area: font;
+    font-size: 2em;
+  }
+
+  .main-container .fill {
+    grid-area: fil;
+    font-size: 2em;
+  }
+
+  .main-container .stroke {
+    grid-area: strok;
+    font-size: 2em;
+  }
+
+  .main-container .btn-txt-l {
+    grid-area: e;
+  }
+
+  .main-container .btn-txt-s {
+    grid-area: f;
+  }
+
+  .main-container .clr-fill {
+    grid-area: g;
+  }
+
+  .main-container .clr-stroke {
+    grid-area: h;
+  }
+
+  .main-container .canvas-container {
+    grid-area: can;
+  }
+}

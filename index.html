@@ -17,7 +17,7 @@
           <li onclick="onMakeMeme()"><a href="#" class="nav-link">Mems</a></li>
           <li><a href="#" class="nav-link">About</a></li>
         </ul>
-        <button onclick="toggleMenu()" class="menu-toggle">☰</button>
+        <!-- <button onclick="toggleMenu()" class="menu-toggle">☰</button> -->
       </div>
     </header>
     <!-- ==============================GALLERY================================== -->
@@ -29,37 +29,66 @@
       <h1>Make Me(me)</h1>
       <div class="main-container">
         <div class="canvas-container">
-            <canvas id="canvas" width="400" height="400"></canvas>
+          <canvas id="canvas" width="400" height="400"></canvas>
         </div>
-          <section class="controllers">
-            <input type="text" name="text" id="text" class="txt-meme" oninput="onAddText(this.value)"/>
-            <div class="btns">
-              <button  class="btn btn-up" type="button">+A</button>
-              <button  class="btn btn-down" type="button">-A</button>
-              <button onclick="onAddLine()" class="btn btn-add" type="button">Add</button>
-              <button onclick=" onRemoveLine()" class="btn btn-delet" type="button">Delete</button>
-            </div>
-            <div class="container">
-                <h3>Fonts:</h3>
-              <button onclick="onSetFontSize(5)" class="btn btn-txt-l"></button>
-              <button onclick="onSetFontSize(-5)" class="btn btn-txt-s"></button>
-              <label for="fill">Fill</label>
-              <input oninput="onSetClrFill(this.value)" type="color" name="fill" id="fill-color" class="btn clr-fill" value="#ffffff">
-              <label for="stroke">Stroke</label>
-              <input oninput="onSetClrStroke(this.value)" type="color" name="stroke" id="stroke-color" class="btn clr-stroke" value="#2c2c2c">
-            </div>            
+        <!-- <section class="controllers"> -->
+        <input
+          type="text"
+          name="text"
+          id="text"
+          class="txt-meme"
+          oninput="onAddText(this.value)"
+        />
+        <button class="btn btn-up" type="button">+A</button>
+        <button class="btn btn-down" type="button">-A</button>
+        <button onclick="onAddLine()" class="btn btn-add" type="button">
+          Add
+        </button>
+        <button onclick=" onRemoveLine()" class="btn btn-delet" type="button">
+          Delete
+        </button>
+        <h3>Fonts:</h3>
+        <button onclick="onSetFontSize(5)" class="btn btn-txt-l"></button>
+        <button onclick="onSetFontSize(-5)" class="btn btn-txt-s"></button>
+        <label class="fill" for="fill">Fill</label>
+        <input
+          oninput="onSetClrFill(this.value)"
+          type="color"
+          name="fill"
+          id="fill-color"
+          class="btn clr-fill"
+          value="#ffffff"
+        />
+        <label class="stroke" for="stroke">Stroke</label>
+        <input
+          oninput="onSetClrStroke(this.value)"
+          type="color"
+          name="stroke"
+          id="stroke-color"
+          class="btn clr-stroke"
+          value="#2c2c2c"
+        />
       </div>
-      </section>
-      <div class="sharing">
-            <input type="file" class="btn file-input" name="image" onchange="onImgInput(event)" />
-            <a href="#" class="btn btn-download" onclick="onDownloadImg(this)" download="my-img.  jpg">Download as jpeg</a>
-        <button class="btn btn-sharing " onclick="onUploadImg()">
-               Share on Facebook
+      <!-- </section> -->
+      <div class="sharing flex flex-column">
+        <input
+          type="file"
+          class="btn file-input"
+          name="image"
+          onchange="onImgInput(event)"
+        />
+        <a
+          href="#"
+          class="btn btn-download"
+          onclick="onDownloadImg(this)"
+          download="my-img.  jpg"
+          >Download as jpeg</a
+        >
+        <button class="btn btn-sharing" onclick="onUploadImg()">
+          Share on Facebook
         </button>
-         <button class="btn btn-save " onclick="onSaveMeme()">
-                Save
-        </button>
-       </div>
+        <button class="btn btn-save" onclick="onSaveMeme()">Save</button>
+      </div>
     </main>
     <!-- ==============================FOOTER================================== -->
     <footer></footer>

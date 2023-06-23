@@ -3,6 +3,8 @@
 const gElCanvas = document.querySelector('#canvas')
 const gCtx = gElCanvas.getContext('2d')
 
+let gRotatePos
+let gResizePos
 let gLastPos
 
 function onInit() {
@@ -20,6 +22,7 @@ function onShowGallery() {
 function onMakeMeme() {
   document.querySelector('.gallery').style.display = 'none'
   document.querySelector('.canvas-elements-container').style.display = 'grid'
+  document.querySelector('.txt-meme').focus()
 }
 
 function resizeCanvas() {
@@ -44,7 +47,7 @@ function renderGalery() {
 function onSelectImg(imgId) {
   document.querySelector('.canvas-elements-container').style.display = 'grid'
   document.querySelector('.gallery').style.display = 'none'
-
+  document.querySelector('.txt-meme').focus()
   resizeCanvas()
   setMeme(imgId)
   addLine(gElCanvas.width / 2, 30)
@@ -60,8 +63,7 @@ function renderMeme() {
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     meme.lines.forEach((line, idx) => {
-      placeTxt(line, idx)
-      renderTxtBorder(line, line.x, line.y, line.fontSize)
+      placeTxt(line, idx, meme.selectedLineIdx)
     })
   }
 }
@@ -87,15 +89,20 @@ function setSelectedLine(line) {
   document.querySelector('.clr-fill').value = line.colorFill
 }
 
-function placeTxt(line) {
-  gCtx.lineWidth = 1
+function placeTxt(line, idx, selLineIdx) {
+  gCtx.lineWidth = line.outline
   gCtx.strokeStyle = line.colorStroke
   gCtx.fillStyle = line.colorFill
   gCtx.font = `${line.fontSize}px ${line.font}`
   gCtx.textAlign = 'center'
   gCtx.textBaseline = 'middle'
-  gCtx.fillText(line.txt, line.x, line.y)
-  gCtx.strokeText(line.txt, line.x, line.y)
+  gCtx.save()
+  gCtx.translate(line.x, line.y)
+  gCtx.rotate(line.rotate)
+  gCtx.fillText(line.txt, 0, 0)
+  gCtx.strokeText(line.txt, 0, 0)
+  if (selLineIdx === idx) renderTxtBorder(line)
+  gCtx.restore()
 }
 
 function onAddText(txt) {
@@ -107,20 +114,43 @@ function measureTextWidth(lineIdx) {
   return gCtx.measureText(gMeme.lines[lineIdx].txt).width
 }
 
-function renderTxtBorder(txt, x, y, fontSize) {
-  let txtSizes = gCtx.measureText(txt)
-  console.log('textSizes', txtSizes)
-  gCtx.strokeStyle = 'Black'
+function renderTxtBorder(line) {
+  const width = gCtx.measureText(line.txt).width * 1.2
+  const lineHeight = line.fontSize * 1.2
+  gCtx.strokeStyle = 'white'
+  gCtx.lineWidth = 2
 
-  let calculatedX = x - txtSizes.width / 2 - 10
-  let calculatedY = y - fontSize + 10
-  gCtx.strokeRect(calculatedX, calculatedY, txtSizes.width + 25, fontSize + 10)
+  // Outline selected line
+  gCtx.strokeRect(-width / 2, -lineHeight / 2, width, lineHeight)
+  // Resize indicator
+  gCtx.fillRect(-width / 2 - 5, -line.fontSize / 2 - 3, 7, -7)
+
+  const angle = Math.atan2(-width / 2, -line.fontSize / 2)
+  const dist = calcDist(width / 2, line.fontSize / 2, { x: 0, y: 0 })
+  // Saving resize indicator location
+  gResizePos = {
+    x: line.x + dist * Math.sin(angle - line.rotate),
+    y: line.y + dist * Math.cos(-angle + line.rotate),
+  }
+
+  gCtx.stroke()
+  gCtx.beginPath()
+  // Rotate indicator
+  gCtx.arc(0, -lineHeight * 0.8, 4, Math.PI, 2 * Math.PI)
+  gCtx.stroke()
+
+  // Saving rotate indicator location
+  gRotatePos = {
+    x: line.x + lineHeight * 0.8 * Math.sin(line.rotate),
+    y: line.y - lineHeight * 0.8 * Math.cos(line.rotate),
+  }
 }
 
 function onAddLine() {
   const width = gElCanvas.width / 2
   const height = gElCanvas.height / 2
   addLine(width, height)
+  document.querySelector('.txt-meme').focus()
   renderMeme()
 }
 

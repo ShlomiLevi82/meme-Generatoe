@@ -8,6 +8,13 @@ let gMeme = {
   selectedLineIdx: 0,
   lines: [],
 }
+
+let gChang = {
+  isRotate: false,
+  isDrag: false,
+  isResize: false,
+}
+
 let gIsDrag = false
 let gSavedMemes = loadMemes()
 
@@ -20,27 +27,6 @@ function createImageList() {
     }
     gImgs.push(img)
   }
-  console.log('gImgs', gImgs)
-}
-
-function setMeme(imgId) {
-  gMeme.selectedImgId = imgId
-}
-
-function getMeme() {
-  return gMeme
-}
-
-function getSavedMemes() {
-  return gSavedMemes
-}
-
-function getImages() {
-  return gImgs
-}
-
-function setLineTxt(txt) {
-  gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
 function createLine(x, y) {
@@ -77,8 +63,10 @@ function findLineIdx({ x, y }) {
       y <= line.y + line.fontSize / 2
     )
   })
-
-  selectLine(lineIdx)
+  if (lineIdx !== -1) {
+    selectLine(lineIdx)
+    return true
+  }
 }
 
 function selectLine(lineIdx) {
@@ -86,36 +74,14 @@ function selectLine(lineIdx) {
   setSelectedLine(gMeme.lines[gMeme.selectedLineIdx])
 }
 
-function setLineDrag(isDrag) {
-  gIsDrag = isDrag
-}
-
-function getIsDrag() {
-  return gIsDrag
-}
-
 function moveLine(dx, dy) {
   gMeme.lines[gMeme.selectedLineIdx].x += dx
   gMeme.lines[gMeme.selectedLineIdx].y += dy
 }
 
-function getSelectedTxt() {
-  return gMeme.lines[gMeme.selectedLineIdx].txt
-}
-
-function setFontSize(sizeDiff) {
+function rotateLine(x, y) {
   const line = gMeme.lines[gMeme.selectedLineIdx]
-
-  line.fontSize += sizeDiff
-  if (line.fontSize >= 80 || line.fontSize <= 20) line.fontSize -= sizeDiff
-}
-
-function setColorStroke(color) {
-  gMeme.lines[gMeme.selectedLineIdx].colorStroke = color
-}
-
-function setColorFill(color) {
-  gMeme.lines[gMeme.selectedLineIdx].colorFill = color
+  line.rotate = Math.atan2(x - line.x, line.y - y)
 }
 
 function editMeme(idx) {
@@ -132,4 +98,105 @@ function saveMeme() {
   gMeme.data = gElCanvas.toDataURL()
   gSavedMemes.push(gMeme)
   saveToStorage(KEY, gSavedMemes)
+}
+
+function resizeBox(x, y, resizePos) {
+  const line = gMeme.lines[gMeme.selectedLineIdx]
+  const dx = x - resizePos.x
+  const dy = y - resizePos.y
+
+  const prevFSize = line.fontSize
+  // Measuring change in both axes and averaging
+  const yFSize = line.fontSize - dy
+  const xFSize =
+    line.fontSize * (1 - (2 * dx) / measureTextWidth(gMeme.selectedLineIdx))
+  const newSize = (yFSize + xFSize) / 2
+
+  // Limiting font size
+  if (newSize > 100) line.fontSize = 100
+  else if (newSize < 25) line.fontSize = 25
+  else line.fontSize = newSize
+}
+
+function deselect() {
+  gMeme.selectedLineIdx = -1
+}
+
+// ------------SET------------------
+
+function setFontSize(sizeDiff) {
+  const line = gMeme.lines[gMeme.selectedLineIdx]
+
+  line.fontSize += sizeDiff
+  if (line.fontSize >= 80 || line.fontSize <= 20) line.fontSize -= sizeDiff
+}
+
+function setColorStroke(color) {
+  gMeme.lines[gMeme.selectedLineIdx].colorStroke = color
+}
+
+function setColorFill(color) {
+  gMeme.lines[gMeme.selectedLineIdx].colorFill = color
+}
+
+function setLineDrag(isDrag) {
+  gChang.isDrag = isDrag
+}
+
+function setResizeMode(isResize) {
+  gChang.isResize = isResize
+}
+
+function setRotateMode(isRotate) {
+  gChang.isRotate = isRotate
+}
+
+function setMeme(imgId) {
+  gMeme.selectedImgId = imgId
+}
+
+function setLineTxt(txt) {
+  gMeme.lines[gMeme.selectedLineIdx].txt = txt
+}
+
+// ------------GET------------------
+
+function getSelectedTxt() {
+  return gMeme.lines[gMeme.selectedLineIdx].txt
+}
+
+function getIsRotate() {
+  return gChang.isRotate
+}
+
+function getIsResize() {
+  return gChang.isResize
+}
+
+function getIsDrag() {
+  return gChang.isDrag
+}
+
+function getIsDrag() {
+  return gChang.isDrag
+}
+
+function getIsResize() {
+  return gChang.isResize
+}
+
+function getIsRotate() {
+  return gChang.isRotate
+}
+
+function getMeme() {
+  return gMeme
+}
+
+function getSavedMemes() {
+  return gSavedMemes
+}
+
+function getImages() {
+  return gImgs
 }

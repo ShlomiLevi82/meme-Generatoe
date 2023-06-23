@@ -5,9 +5,13 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 function addListeners() {
   addMouseListeners()
   addTouchListeners()
-  window.addEventListener('resize', resizeCanvas)
-  // gElCanvas.addEventListener('click',draw())
+  window.addEventListener('resize', () => {
+    resizeCanvas()
+
+    renderMeme()
+  })
 }
+
 function addMouseListeners() {
   gElCanvas.addEventListener('mousedown', onDown)
   gElCanvas.addEventListener('mousemove', onMove)
@@ -23,34 +27,39 @@ function addTouchListeners() {
 function onDown(ev) {
   const pos = getEvPos(ev)
 
-  findLineIdx(pos)
-  setLineDrag(true)
-
-  gLastPos = pos
-
+  // checking what user clicked
+  if (calcDist(pos.x, pos.y, gRotatePos) < 10) {
+    setRotateMode(true)
+  } else if (calcDist(pos.x, pos.y, gResizePos) < 10) {
+    setResizeMode(true)
+  } else if (findLineIdx(pos)) {
+    setLineDrag(true)
+    gLastPos = pos
+  } else deselect()
   document.body.style.cursor = 'grabbing'
   renderMeme()
 }
 
 function onMove(ev) {
-  const isDrag = getIsDrag()
-  if (!isDrag) return
-  // console.log('Moving the line')
-
   const pos = getEvPos(ev)
-  // Calc the delta, the diff we moved
-  const dx = pos.x - gLastPos.x
-  const dy = pos.y - gLastPos.y
-  moveLine(dx, dy)
-  // Save the last pos, we remember where we`ve been and move accordingly
-  gLastPos = pos
-  // The canvas is render again after every move
+  // Drag rotate or resize
+  if (getIsRotate()) {
+    rotateLine(pos.x, pos.y)
+  } else if (getIsResize()) {
+    resizeLine(pos.x, pos.y, gResizePos)
+  } else if (getIsDrag()) {
+    const dx = pos.x - gLastPos.x
+    const dy = pos.y - gLastPos.y
+    moveLine(dx, dy)
+    gLastPos = pos
+  }
   renderMeme()
 }
 
 function onUp() {
   setLineDrag(false)
-
+  setResizeMode(false)
+  setRotateMode(false)
   document.body.style.cursor = 'grab'
 }
 

@@ -73,3 +73,12 @@ function getRandomColor() {
   }
   return color
 }
+
+function deepCopy(obj) {
+  return JSON.parse(JSON.stringify(obj))
+}
+
+function calcDist(x, y, pos) {
+  var dist = Math.sqrt(Math.pow(x - pos.x, 2) + Math.pow(y - pos.y, 2))
+  return dist
+}

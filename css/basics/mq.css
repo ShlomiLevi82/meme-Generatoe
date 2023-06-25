@@ -37,7 +37,16 @@
 }
 
 /* MEDIUM */
+/*
 @media (min-width: 800px) {
+  .main-layout {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .main-header-container {
+    width: 100vw;
+    margin-inline: 0;
+  }
   .main-nav > li {
     margin: 10px;
   }
@@ -54,6 +63,10 @@
   h1 {
     margin-inline: auto;
   }
+  .canvas-elements-container {
+    margin-inline: 2em;
+  }
+
   .main-container {
     grid-template-columns: repeat(8, auto);
     grid-template-rows: repeat(4, auto);
@@ -126,79 +139,128 @@
     width: auto;
   }
 }
+*/
 
 /* LARGE */
-@media (min-width: 1020px) {
-  .main-container {
-    grid-template-columns: repeat(10, auto);
-    grid-template-rows: repeat(5, auto);
-    grid-template-areas:
-      'h1  h1  h1  h1  h1  h1  h1    h1    h1    h1'
-      'can can can can can can txt   txt   txt   txt'
-      'can can can can can can a     b     c     d'
-      'can can can can can can font  font  fil   strok'
-      'can can can can can can e     f     g     h';
+@media (min-width: 880px) {
+  .main-layout {
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  .main-container h1 {
+  .main-header-container {
+    width: 100vw;
+    margin-inline: 0;
+  }
+
+  .main-nav > li {
+    margin: 10px;
+  }
+
+  .main-header-container {
+    display: grid;
+    align-items: center;
+    text-align: center;
     margin-inline: auto;
-    grid-area: h1;
+    font-size: 2em;
+    height: 130px;
+    width: 18em;
+  }
+
+  h1 {
+    margin-inline: auto;
+  }
+
+  .main-layout {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .main-header-container {
+    width: 100vw;
+    margin-inline: 0;
+  }
+
+  .main-header ul {
+    margin-inline-end: 1em;
+  }
+
+  .main-logo {
+    margin-inline-start: 1em;
+  }
+
+  .gallery {
+    margin: auto;
+  }
+
+  .main-container button {
+    height: 2em;
+  }
+
+  .main-container {
+    display: flex;
+    width: 100vw;
+  }
+
+  .canvas-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .canvas-container canvas {
+    margin-inline-start: 0;
+  }
+
+  .buttons-section {
+    width: 40vw;
   }
 
   .main-container .txt-meme {
-    grid-area: txt;
-    width: 100%;
-    justify-self: center;
+    width: 90%;
+    margin-inline-end: 1em;
+  }
+  .sharing {
+    width: min-content;
   }
 
-  .main-container button.btn-up {
-    grid-area: a;
+  .buttons-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
   }
 
-  .main-container button.btn-down {
-    grid-area: b;
-  }
-
-  .main-container button.btn-add {
-    grid-area: c;
-  }
-
-  .main-container button.btn-delet {
-    grid-area: d;
-  }
-
-  .main-container h3 {
-    grid-area: font;
+  .lbls {
     font-size: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 2.2em;
+    margin-block-end: -1.2em;
+    color: var(--clrPrimary1);
   }
 
-  .main-container .fill {
-    grid-area: fil;
-    font-size: 2em;
+  .lbls .stroke {
+    margin-inline-start: -1.3em;
   }
 
-  .main-container .stroke {
-    grid-area: strok;
-    font-size: 2em;
+  .btns-fonts {
+    display: flex;
+    align-items: center;
+    gap: 1em;
   }
 
-  .main-container .btn-txt-l {
-    grid-area: e;
+  .sharing {
+    display: flex;
   }
 
-  .main-container .btn-txt-s {
-    grid-area: f;
+  .btns-save a {
+    padding: 10px;
   }
 
-  .main-container .clr-fill {
-    grid-area: g;
-  }
-
-  .main-container .clr-stroke {
-    grid-area: h;
-  }
-
-  .main-container .canvas-container {
-    grid-area: can;
+  .btns-save a:hover {
+    scale: 1.1;
   }
 }

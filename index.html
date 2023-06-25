@@ -9,7 +9,7 @@
   <body class="main-layout" onload="onInit()">
     <header class="main-header-container">
       <div class="main-header main-layout flex space-between align-center">
-        <div class="main-logo"><a href="#" class="nav-link">Logo</a></div>
+        <div class="main-logo"><a href="#" class="nav-link">Meme Gen-Z</a></div>
         <ul class="main-nav flex clean-list align-center">
           <li onclick="onShowGallery()">
             <a href="#" class="nav-link">Gallery</a>
@@ -21,9 +21,9 @@
       </div>
     </header>
     <!-- ==============================GALLERY================================== -->
-    <section class="gallery" name="gallery">
-      <h1>Pic a pic</h1>
-    </section>
+
+    <section class="gallery" name="gallery"></section>
+
     <!-- ==============================MEMES GENERATOR================================== -->
     <main class="canvas-elements-container">
       <h1>Make Me(me)</h1>
@@ -31,63 +31,78 @@
         <div class="canvas-container">
           <canvas id="canvas" width="400" height="400"></canvas>
         </div>
-        <!-- <section class="controllers"> -->
-        <input
-          type="text"
-          name="text"
-          id="text"
-          class="txt-meme"
-          oninput="onAddText(this.value)"
-        />
-        <button class="btn btn-up" type="button"></button>
-        <button class="btn btn-down" type="button"></button>
-        <button onclick="onAddLine()" class="btn btn-add" type="button">
-          Add
-        </button>
-        <button onclick=" onRemoveLine()" class="btn btn-delet" type="button">
-          Delete
-        </button>
-        <h3>Fonts:</h3>
-        <button onclick="onSetFontSize(5)" class="btn btn-txt-l">+A</button>
-        <button onclick="onSetFontSize(-5)" class="btn btn-txt-s">-A</button>
-        <label class="fill" for="fill">Fill</label>
-        <input
-          oninput="onSetClrFill(this.value)"
-          type="color"
-          name="fill"
-          id="fill-color"
-          class="btn clr-fill"
-          value="#ffffff"
-        />
-        <label class="stroke" for="stroke">Stroke</label>
-        <input
-          oninput="onSetClrStroke(this.value)"
-          type="color"
-          name="stroke"
-          id="stroke-color"
-          class="btn clr-stroke"
-          value="#2c2c2c"
-        />
-      </div>
-      <!-- </section> -->
-      <div class="sharing flex flex-column">
-        <input
-          type="file"
-          class="btn file-input"
-          name="image"
-          onchange="onImgInput(event)"
-        />
-        <a
-          href="#"
-          class="btn btn-download"
-          onclick="onDownloadImg(this)"
-          download="my-img.  jpg"
-          >Download as jpeg</a
-        >
-        <button class="btn btn-sharing" onclick="onUploadImg()">
-          Share on Facebook
-        </button>
-        <button class="btn btn-save" onclick="onSaveMeme()">Save</button>
+
+        <div class="buttons-section">
+          <input
+            type="text"
+            name="text"
+            id="text"
+            class="txt-meme"
+            oninput="onAddText(this.value)"
+          />
+          <section class="btns">
+            <button class="btn btn-up" type="button"></button>
+            <button class="btn btn-down" type="button"></button>
+            <button onclick="onAddLine()" class="btn btn-add" type="button">
+              Add
+            </button>
+            <button
+              onclick=" onRemoveLine()"
+              class="btn btn-delet"
+              type="button"
+            >
+              Delete
+            </button>
+          </section>
+          <section class="lbls">
+            <label class="fonts">Fonts</label>
+            <label class="fill" for="fill">Fill</label>
+            <label class="stroke" for="stroke">Stroke</label>
+          </section>
+          <section class="btns-fonts">
+            <button onclick="onSetFontSize(5)" class="btn btn-txt-l">+A</button>
+            <button onclick="onSetFontSize(-5)" class="btn btn-txt-s">
+              -A
+            </button>
+            <input
+              oninput="onSetClrFill(this.value)"
+              type="color"
+              name="fill"
+              id="fill-color"
+              class="btn clr-fill"
+              value="#ffffff"
+            />
+            <input
+              oninput="onSetClrStroke(this.value)"
+              type="color"
+              name="stroke"
+              id="stroke-color"
+              class="btn clr-stroke"
+              value="#2c2c2c"
+            />
+          </section>
+          <div class="sharing flex flex-column">
+            <button class="btn btn-sharing" onclick="onUploadImg()">
+              Share on Facebook
+            </button>
+            <section class="btns-save">
+              <a
+                href="#"
+                class="btn btn-download"
+                onclick="onDownloadImg(this)"
+                download="my-img.  jpg"
+                >Download as jpeg</a
+              >
+              <button class="btn btn-save" onclick="onSaveMeme()">Save</button>
+              <input
+                type="file"
+                class="btn file-input"
+                name="image"
+                onchange="onImgInput(event)"
+              />
+            </section>
+          </div>
+        </div>
       </div>
     </main>
     <!-- ==============================FOOTER================================== -->

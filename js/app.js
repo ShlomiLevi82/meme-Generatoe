@@ -38,8 +38,8 @@ function renderGalery() {
   let str = ''
   for (let i = 0; i < gImgs.length; i++) {
     str += `<div class="img-card" onClick="onSelectImg('${gImgs[i].id}')">    
-            <img src="/img/${i + 1}.jpg" alt="img${i}" />
-           </div>`
+              <img src="img/${i + 1}.jpg" alt="img${i}" />
+            </div>`
   }
   elGallery.innerHTML = str
 }

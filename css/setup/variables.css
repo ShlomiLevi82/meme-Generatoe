@@ -2,25 +2,42 @@
 
 :root {
   /* primary */
-  --clrPrimary8: #ffffff;
-  --clrPrimary7: #f8f8f8;
-  --clrPrimary6: #e5e5e5;
-  --clrPrimary5: #e1e0e0;
-  --clrPrimary4: #c2c2c2;
-  --clrPrimary3: #a6a6a6;
-  --clrPrimary2: #939292;
-  --clrPrimary1: #818181;
-  --clrPrimarybase: #606060;
-  --clrPrimary-1: #4f4e4e;
-  --clrPrimary-2: #292929;
-  --clrPrimary-3: #1e1e1e;
+
+  --clrPrimary1: #000016;
+  --clrPrimary2: #282b53;
+  --clrPrimarybase: #5c59a0;
+  --clrPrimary-1: #9f8df9;
+  --clrPrimary-2: #f1c8ff;
 
   /* secondary */
   --clrSecondarybase: #58c93a;
+  --clrText: #fff5f5;
 
   /* unique */
   --clrFacebookIcon: #516fad;
   --clrTwitterIcon: #26a7de;
   --clrBehanceIcon: #053eff;
   --clrDribbbleIcon: #ea4c89;
+
+  /* --color: #0c3384;
+  --color: #0654db;
+  --color: #08b1ff;
+  --color: #0ffff8;
+  --color: #71fff8; */
+}
+
+.color1 {
+  color: #000016;
+}
+.color2 {
+  color: #282b53;
+}
+.color3 {
+  color: #5c59a0;
+}
+.color4 {
+  color: #9f8df9;
+}
+.color5 {
+  color: #f1c8ff;
 }

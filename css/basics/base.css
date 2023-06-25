@@ -5,8 +5,7 @@
 html {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: 400;
-  color: var(--clrPrimary-1);
-  background-color: var(--clrBehanceIcon);
+  color: var(--clrText);
 }
 
 body {
@@ -22,6 +21,7 @@ h6 {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
   margin: 0 0 0.8rem;
+  color: var(--clrPrimary-1);
 }
 
 p {
@@ -32,15 +32,26 @@ p {
 .btn {
   border: 1px solid var(--clrPrimary-1);
   font-size: 22px;
-  color: var(--clrPrimary7);
+  color: var(--clrText);
+  background-color: var(--clrPrimarybase);
   cursor: pointer;
   font-family: Helvetica, Arial, sans-serif;
-  margin: 0 5px;
+  text-decoration: none;
+  text-align: center;
   user-select: none;
   white-space: nowrap;
   padding: 5px 10px;
-  border-radius: 3px;
-  text-decoration: none;
+  border-radius: 10px;
   margin: 3px;
-  background-color: var(--clrTwitterIcon);
+  width: min-content;
+}
+
+.btn:hover {
+  scale: 1.1;
+}
+
+.buttons-section .btn.clr-stroke,
+.buttons-section .btn.clr-fill {
+  width: 45px;
+  height: 45px;
 }

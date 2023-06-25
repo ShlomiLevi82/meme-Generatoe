@@ -77,12 +77,10 @@
 
 .canvas-container {
   grid-area: can;
-  margin-block-start: 1em;
   width: auto;
   height: auto;
 }
 
 .sharing.flex.flex-column {
   align-items: stretch;
-  width: 90vw;
 }
